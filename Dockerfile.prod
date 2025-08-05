@@ -1,0 +1,15 @@
+FROM golang:1.21.3  AS build
+
+WORKDIR /go/src
+ENV PATH="/go/bin:${PATH}"
+
+COPY . .
+
+RUN go build -o go_game_min_docker ./cmd
+
+
+FROM scratch
+ 
+COPY --from=build /go/src/go_game_min_docker go_game_min_docker
+
+CMD  [ "./go_game_min_docker" ]
