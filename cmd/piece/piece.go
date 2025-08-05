@@ -1,26 +1,40 @@
 package piece
 
-// "fmt" // Uncomment if you need fmt for debugging or print statements
+import (
+	"fmt" // Mantido para fmt.Sprintf, que é necessário para formatar o símbolo
+)
 
-// Piece represents a generic game piece.
-// This struct will define common attributes for all pieces.
+// Piece representa uma peça genérica no jogo.
+// Com as regras simplificadas, todas as peças têm o mesmo tipo de movimento.
 type Piece struct {
-	ID    string // Unique identifier for the piece
-	Color string // e.g., "black", "white"
-	// Row   int    // Current row position
-	// Col   int    // Current column position
-	// Add other common piece attributes here
+	Index  int    // Identificador numérico único para a peça (0-base)
+	Color  string // Cor da peça ("black" ou "white")
+	Row    int    // Posição atual da peça (linha, 0-base)
+	Col    int    // Posição atual da peça (coluna, 0-base)
+	Symbol string // Símbolo para representação no terminal (ex: "B1", "W2")
 }
 
-func PrintNewPiece(id, color string) *Piece {
-	return &Piece{ID: id,
-		Color: color}
+// NewPiece cria e retorna uma nova instância de Piece.
+// O símbolo da peça é determinado pela sua cor e índice numérico.
+func NewPiece(index int, color string, row, col int) *Piece {
+	var symbol string
+	if color == "black" {
+		symbol = fmt.Sprintf("B%d ", index+1) // Peça Preta, com índice 1-base (ex: B1, B2)
+	} else {
+		symbol = fmt.Sprintf("W%d ", index+1) // Peça Branca, com índice 1-base (ex: W1, W2)
+	}
+
+	return &Piece{
+		Index:  index,
+		Color:  color,
+		Row:    row,
+		Col:    col,
+		Symbol: symbol,
+	}
 }
 
-// NewPiece creates and returns a new Piece instance.
-//func NewPiece(id, color string, row, col int) *Piece {
-// 	// Implementation for creating a new piece
-// 	return &Piece{}
-// }
-
-// Add other piece-related methods here (e.g., UpdatePosition, GetPossibleMoves).
+// UpdatePosition atualiza a linha e coluna da peça.
+func (p *Piece) UpdatePosition(newRow, newCol int) {
+	p.Row = newRow
+	p.Col = newCol
+}
