@@ -44,9 +44,7 @@ cd go_game_min_docker
 	docker build -f Dockerfile.prod -t ikesalmonson/go-game-min-docker:prod .
 	docker run --rm -it   ikesalmonson/go-game-min-docker:prod 
 
-[Próximo passo, ex: Crie um ambiente virtual...]
-[Próximo passo, ex: Instale as dependências...]
-[Próximo passo, ex: Inicie os containers Docker...]
+ 
 
 ### ⚙️ Como Rodar para desenvolvimento
 	Criar a imagem Docker Dev:
