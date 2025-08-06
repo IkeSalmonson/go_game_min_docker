@@ -50,7 +50,7 @@ docker build -f Dockerfile.prod -t ikesalmonson/go-game-min-docker:prod .
 ```
 4. Execute a imagem criada em modo iterativo:
 ``` bash
-docker run --rm -it --name go-game-min-docker-prod  ikesalmonson/go-game-min-docker:prod 
+docker run --rm -it --name go-game-min-docker-prod  ikesalmonson/go-game-min-docker:prod
 ``` 
 
 ### ⚙️ Como Rodar para desenvolvimento
@@ -98,4 +98,4 @@ Esta tabela mostra o uso de recursos (CPU, Memória, I/O de Disco) dos container
 
 ## ✨ Demonstração
 
-[Insira aqui um GIF animado ou algumas screenshots que mostrem seu projeto em ação. Ferramentas como ScreenToGif (Windows)]
+![Demonstração da execução do jogo](img/demo_go_game.gif)
