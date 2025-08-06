@@ -42,7 +42,7 @@ cd go_game_min_docker
 	Docker image Prod / otimizada : 
 	
 	docker build -f Dockerfile.prod -t ikesalmonson/go-game-min-docker:prod .
-	docker run --rm -it   ikesalmonson/go-game-min-docker:prod 
+	docker run --rm -it --name go-game-min-docker-prod  ikesalmonson/go-game-min-docker:prod 
 
  
 
@@ -53,12 +53,35 @@ cd go_game_min_docker
    ```
 Executar a imagem com o codigo Go incluso via volume e executar a imagem dev em modo iterativo: 
 ``` 
-    docker run --rm -it -v $(pwd):/go/src ikesalmonson/go-game-min-docker:dev bash 
+    docker run --rm -it --name go-game-min-docker-dev -v $(pwd):/go/src ikesalmonson/go-game-min-docker:dev bash 
 ```
 
 
 ## 📊 Resultados
-[inserir tabela comparativa do tamanho das imagens de dev e prod]
+
+---
+
+### Comparativo de Tamanho das Imagens Docker
+
+Esta tabela demonstra a diferença no tamanho das imagens de desenvolvimento e produção, conforme listado pelo comando `docker images`. A imagem de produção, construída com `scratch`, é significativamente menor.
+
+| Repositório / Imagem | Tag    | ID da Imagem | Criada Há | Tamanho |
+| :------------------- | :----- | :----------- | :-------- | :------ |
+| `ikesalmonson/go-game-min-docker` | `prod` | `bb315d8b50cb` | 22 horas  | **1.89MB** |
+| `ikesalmonson/go-game-min-docker` | `dev`  | `cbf45488a510` | 27 horas  | **815MB** |
+
+---
+
+### Comparativo de Consumo de Recursos em Tempo Real
+
+Esta tabela mostra o uso de recursos (CPU, Memória, I/O de Disco) dos containers de desenvolvimento e produção em estado ocioso (aguardando as dimensões do tabuleiro), obtido via `docker stats`. Note a economia de memória e I/O na versão de produção.
+
+| ID do Container | Nome do Container       | CPU %  | Uso de Memória / Limite | Memória % | I/O de Rede | I/O de Bloco | PIDs |
+| :-------------- | :---------------------- | :----- | :---------------------- | :-------- | :---------- | :----------- | :--- |
+| `672966a094ad`  | `go-game-min-docker-dev` | `0.00%` | `72.89MiB / 7.757GiB`   | `0.92%`   | `992B / 126B` | `51.3MB / 56.3MB` | `17` |
+| `6a50fe30014a`  | `go-game-min-docker-prod`| `0.00%` | `916KiB / 7.757GiB`     | `0.01%`   | `796B / 126B` | `0B / 0B`    | `5`  |
+
+---
 
 
 ## ✨ Demonstração
